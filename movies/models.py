@@ -86,9 +86,9 @@ class Movie(models.Model):
         verbose_name_plural = "Фильмы"
 
 
-class MovieShorts(models.Model):
+class MovieShots(models.Model):
     """Кадры из фильма"""
-    title = models.CharField("Название", max_length=100)
+    title = models.CharField("Заголовок", max_length=100)
     description = models.TextField("Описание")
     image = models.ImageField("Изображение", upload_to="movie_shorts/")
     movie = models.ForeignKey(Movie, verbose_name="Фильм", on_delete=models.CASCADE)
