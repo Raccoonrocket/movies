@@ -75,11 +75,18 @@ class Movie(models.Model):
     url = models.SlugField(max_length=130, unique=True)
     draft = models.BooleanField("Черновик", default=False)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(args, kwargs)
+        self.reviews_set = None
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('movie_detail', kwargs={'slug': self.url})
+
+    def get_review(self):
+        return self.reviews_set.filter(parent__isnull=True)
 
     class Meta:
         verbose_name = "Фильм"
